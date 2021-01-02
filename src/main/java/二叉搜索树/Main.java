@@ -18,7 +18,16 @@ public class Main {
         BinaryTrees.print(sbt);
         System.out.println();
         System.out.println("---------------------------------");
-        sbt.preorderTraversal();
+//        sbt.preorderTraversal();
+//        sbt.inorderTraversal();
+//        sbt.postorderTraversal();
+        sbt.levelOrderTraversal(new SearchBinaryTree.Visitor<Person>() {
+            @Override
+            boolean visitor(Person p) {
+                System.out.println(p);
+                return false;
+            }
+        });
     }
 
 //    SearchBinaryTree<Person> sbt = new SearchBinaryTree<>(Comparator.comparingInt(Person::getAge));
