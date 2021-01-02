@@ -22,23 +22,17 @@ public class SearchBinaryTree<E> implements BinaryTreeInfo {
      * 添加节点
      * @param element
      */
-    public void add(E element) {
+    public E add(E element) {
         elementNotNullCheck(element);
-    }
-
-    private E elementNotNullCheck(E e) {
-        if (e == null) {
-            throw new IllegalArgumentException("element not be null ……");
-        }
         if (root == null) {
-            root = new Node<>(e, null);
+            root = new Node<>(element, null);
             return null;
         }
         Node<E> node = root;
         Node<E> parent = null;
         int com = 0;
         while (node != null) {
-            com = compare(e, node.element);
+            com = compare(element, node.element);
             parent = node;
             if (com > 0) {
                 node = node.right;
@@ -49,24 +43,60 @@ public class SearchBinaryTree<E> implements BinaryTreeInfo {
             }
         }
         if (com > 0) {
-            parent.right = new Node<>(e, parent);
+            parent.right = new Node<>(element, parent);
             return null;
         }
         if (com < 0) {
-            parent.left = new Node<>(e, parent);
+            parent.left = new Node<>(element, parent);
             return null;
         } else {
             E old = node.element;
-            node.element = e;
+            node.element = element;
             return old;
         }
     }
 
+    private void elementNotNullCheck(E e) {
+        if (e == null) {
+            throw new IllegalArgumentException("element not be null ……");
+        }
+    }
+
+    /**
+     * 比较大小
+     * @param e1
+     * @param e2
+     * @return 返回1 e1大,返回-1 e2大,返回0 相等
+     */
     private int compare(E e1, E e2) {
         if (comparator != null) {
             return comparator.compare(e1, e2);
         }
         return ((Comparable) e1).compareTo(e2);
+    }
+
+    /**
+     * 前序遍历
+     */
+    public void preorderTraversal() {
+        Node<E> node = root;
+        Node<E> parent = node;
+        while (node != null) {
+            System.out.println(node.element);
+            node = node.left;
+        }
+//        preorderTraversal(root);
+    }
+
+    /**
+     * 前序遍历-递归方式
+     * @param node
+     */
+    private void preorderTraversal(Node<E> node) {
+        if (node == null) return;
+        System.out.println(node.element);
+        preorderTraversal(node.left);
+        preorderTraversal(node.right);
     }
 
     private static class Node<E> {

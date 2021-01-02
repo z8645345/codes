@@ -18,8 +18,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "age=" + age +
-                '}';
+        return "Person{" + age + '}';
     }
 }

@@ -9,13 +9,16 @@ public class Main {
 
     public static void main(String[] args) {
         Integer[] arr = new Integer[] {
-                7, 4, 9, 2, 5, 8, 11, 3, 12, 1, 7, 5, 8
+                7, 4, 9, 2, 5, 8, 11, 3, 12, 1
         };
         SearchBinaryTree<Person> sbt = new SearchBinaryTree<>(Comparator.comparingInt(Person::getAge));
         for (Integer i : arr) {
             sbt.add(new Person(i));
         }
         BinaryTrees.print(sbt);
+        System.out.println();
+        System.out.println("---------------------------------");
+        sbt.preorderTraversal();
     }
 
 //    SearchBinaryTree<Person> sbt = new SearchBinaryTree<>(Comparator.comparingInt(Person::getAge));
