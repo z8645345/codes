@@ -3,6 +3,7 @@ package 二叉搜索树;
 import 二叉搜索树.printer.BinaryTreeInfo;
 
 import java.util.Comparator;
+import java.util.Stack;
 
 public class SearchBinaryTree<E> implements BinaryTreeInfo {
 
@@ -81,9 +82,24 @@ public class SearchBinaryTree<E> implements BinaryTreeInfo {
     public void preorderTraversal() {
         Node<E> node = root;
         Node<E> parent = node;
-        while (node != null) {
+        if (node != null) {
+            Stack<Node<E>> stack = new Stack<>();
             System.out.println(node.element);
-            node = node.left;
+            Node<E> leftNode = node.left;
+            if (node.right != null) {
+                stack.add(node.right);
+            }
+            while (leftNode != null) {
+                System.out.println(leftNode.element);
+                if (leftNode.right != null) {
+                    stack.add(leftNode.right);
+                }
+                leftNode = leftNode.left;
+                if (leftNode == null && !stack.empty()) {
+                    leftNode = stack.pop();
+
+                }
+            }
         }
 //        preorderTraversal(root);
     }
