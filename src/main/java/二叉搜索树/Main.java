@@ -21,13 +21,15 @@ public class Main {
 //        sbt.preorderTraversal();
 //        sbt.inorderTraversal();
 //        sbt.postorderTraversal();
-        sbt.levelOrderTraversal(new SearchBinaryTree.Visitor<Person>() {
+        /*sbt.levelOrderTraversal(new SearchBinaryTree.Visitor<Person>() {
             @Override
             boolean visitor(Person p) {
                 System.out.println(p);
                 return false;
             }
-        });
+        });*/
+//        System.out.println(sbt.height());
+        System.out.println(sbt.isComplete());
     }
 
 //    SearchBinaryTree<Person> sbt = new SearchBinaryTree<>(Comparator.comparingInt(Person::getAge));

@@ -159,6 +159,72 @@ public class SearchBinaryTree<E> implements BinaryTreeInfo {
         }
     }
 
+    /**
+     * 判断树的高度
+     * @return
+     */
+    public int height() {
+        if (root == null) return 0;
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(root);
+        int height = 0;
+        int levelNum = 1;
+        while (!queue.isEmpty()) {
+            Node<E> node = queue.poll();
+            levelNum --;
+            if (node.left != null) queue.offer(node.left);
+            if (node.right != null) queue.offer(node.right);
+            if (levelNum == 0) {
+                levelNum = queue.size();
+                height ++;
+            }
+        }
+        return height;
+    }
+
+    /**
+     * 判断是否完全二叉树
+     * @return
+     */
+    public boolean isComplete() {
+        if (root == null) return false;
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(root);
+        boolean leaf = false;
+        while (!queue.isEmpty()) {
+            Node<E> node = queue.poll();
+            if (leaf && !node.isLeaf()) return false;
+            if (node.left != null) {
+                queue.offer(node.left);
+            } else if (node.right != null) { // left == null && right != null
+                return false;
+            }
+            if (node.right != null) {
+                queue.offer(node.right);
+            } else { // (left == null && right == null) || (left != null && right == null)
+                leaf = true;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 递归判断树的高度
+     */
+    public int height2() {
+        return height(root);
+    }
+
+    /**
+     * 递归判断树的高度
+     * @param node
+     * @return
+     */
+    public int height(Node<E> node) {
+        if (node == null) return 0;
+        return Math.max(height(node.left), height(node.right)) + 1;
+    }
+
     public abstract static class Visitor<E> {
         private boolean stop;
 
@@ -174,6 +240,22 @@ public class SearchBinaryTree<E> implements BinaryTreeInfo {
         public Node(E element, Node<E> parent) {
             this.element = element;
             this.parent = parent;
+        }
+
+        /**
+         * 是否叶子节点
+         * @return
+         */
+        public boolean isLeaf() {
+            return left == null && right == null;
+        }
+
+        /**
+         * 是否有两个子节点
+         * @return
+         */
+        public boolean is2Children() {
+            return left != null && right != null;
         }
     }
 
