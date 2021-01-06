@@ -225,6 +225,28 @@ public class SearchBinaryTree<E> implements BinaryTreeInfo {
         return Math.max(height(node.left), height(node.right)) + 1;
     }
 
+    /**
+     * 二叉树翻转
+     * @return
+     */
+    public void fip() {
+        fip(root);
+    }
+
+    public void fip(Node<E> root) {
+        if (root == null) return;
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            Node<E> node = queue.poll();
+            Node<E> temp = node.left;
+            node.left = node.right;
+            node.right = temp;
+            if (node.left != null) queue.offer(node.left);
+            if (node.right != null) queue.offer(node.right);
+        }
+    }
+
     public abstract static class Visitor<E> {
         private boolean stop;
 

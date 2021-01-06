@@ -29,7 +29,9 @@ public class Main {
             }
         });*/
 //        System.out.println(sbt.height());
-        System.out.println(sbt.isComplete());
+//        System.out.println(sbt.isComplete());
+        sbt.fip();
+        BinaryTrees.print(sbt);
     }
 
 //    SearchBinaryTree<Person> sbt = new SearchBinaryTree<>(Comparator.comparingInt(Person::getAge));
